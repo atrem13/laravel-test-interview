@@ -19,16 +19,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::post('/number-one', function () {
-    $text = str_split('aaabbcccddeddbzaa');
-    $temp = [];
-    foreach($text as $item){
-        if(array_key_exists($item, $temp)){
-            $temp[$item] += 1;
-        }else{
-            array_push($temp, $item);
-        }
+    $inputText = str_split('aaabbcccddeddbzaa');
+    $totalChar = array_count_values($inputText);
+    $result = '';
+
+    foreach ($totalChar as $char => $count) {
+        $result .= ($count>1) ? $char . $count : $char;
     }
-    return $temp;
+
+    return $result;
 });
 Route::post('/number-two', function () {
     $arrayList = collect([9, 3, 7, 8, 2, 6, 1, 4, 10, 2, 2, 3])->sort()->toArray();
