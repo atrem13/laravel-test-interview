@@ -30,8 +30,18 @@ Route::post('/number-one', function () {
     return $result;
 });
 Route::post('/number-two', function () {
-    $arrayList = collect([9, 3, 7, 8, 2, 6, 1, 4, 10, 2, 2, 3])->sort()->toArray();
-    return [...$arrayList];
+    $arrayList = [9, 3, 7, 8, 2, 6, 1, 4, 10, 2, 2, 3];
+    for ($i = 0; $i < count($arrayList) - 1; $i++) {
+        for ($j = 0; $j < count($arrayList) - $i - 1; $j++) {
+            if ($arrayList[$j] > $arrayList[$j + 1]) {
+                $temp = $arrayList[$j];
+                $arrayList[$j] = $arrayList[$j + 1];
+                $arrayList[$j + 1] = $temp;
+            }
+        }
+    }
+    
+    return $arrayList;
 });
 Route::post('/number-three', function (Request $request) {
     $data = [
